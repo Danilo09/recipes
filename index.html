@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe</title>
+</head>
+
+<body>
+
+    <script type="module">
+        import { Storage } from './src/libs/Storage.js'
+
+        const userStorage = new Storage('user');
+
+        userStorage.save({
+            name: 'Danilo',
+            email: 'danilo@danilo.com',
+            photo: 'danilo.png'
+        })
+        userStorage.save({
+            name: 'jose',
+            email: 'jose@jose.com',
+            photo: 'jose.png'
+        })
+    </script>
+</body>
+
+</html>
