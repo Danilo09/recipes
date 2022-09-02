@@ -28,9 +28,19 @@ export class Storage {
         return data
     }
 
-    async findOne(id) { }
-
-    async findAll() { }
+    async findOne(id) {
+        return JSON.parse(this.#storage.getItem(`${this.table}-${id}`));
+    }
+    // entries - return key and value
+    async findAll() {
+        return Object.entries(this.#storage)
+            .filter(([entryKey]) => (
+                entryKey.startsWith(this.table)
+            ))
+            .map(([_, entryValue]) => (
+                JSON.parse(entryValue)
+            ))
+    }
 
     async fundOneAndUpdate(id, data) { }
 

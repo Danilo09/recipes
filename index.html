@@ -15,16 +15,21 @@
 
         const userStorage = new Storage('user');
 
-        userStorage.save({
-            name: 'Danilo',
-            email: 'danilo@danilo.com',
-            photo: 'danilo.png'
-        })
-        userStorage.save({
-            name: 'jose',
-            email: 'jose@jose.com',
-            photo: 'jose.png'
-        })
+        // userStorage.save({
+        //     name: 'Danilo',
+        //     email: 'danilo@danilo.com',
+        //     photo: 'danilo.png'
+        // })
+        // userStorage.save({
+        //     name: 'jose',
+        //     email: 'jose@jose.com',
+        //     photo: 'jose.png'
+        // })
+        // userStorage.findOne('7f458572-89cd8e4c')
+        //     .then(console.log)
+
+        const usuariosAll = await userStorage.findAll();
+        console.table(usuariosAll)
     </script>
 </body>
 
