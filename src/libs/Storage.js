@@ -17,19 +17,18 @@ export class Storage {
 
     async save(data) {
         const id = this.#generateId();
-        const key = `${this.table}-${id}`;
 
         const newData = {
             id,
             ...data,
         }
 
-        this.#storage.setItem(key, JSON.stringify(newData))
+        this.#storage.setItem(this.#getKey(id), JSON.stringify(newData))
         return data
     }
 
     async findOne(id) {
-        return JSON.parse(this.#storage.getItem(`${this.table}-${id}`));
+        return JSON.parse(this.#storage.getItem(this.#getKey(id)));
     }
     // entries - return key and value
     async findAll() {
@@ -42,7 +41,24 @@ export class Storage {
             ))
     }
 
-    async fundOneAndUpdate(id, data) { }
+    async findOneAndUpdate(id, data) {
+        const item = await this.findOne(id);
+
+        if (!item) {
+            throw new Error(`Registro "${id}" não encontrado em ${this.table}`);
+        }
+
+        const newData = {
+            ...item,
+            ...data,
+            id: item.id
+        };
+
+        this.#storage.setItem(this.#getKey(id), JSON.stringify(newData));
+
+        return this.findOne(id);
+
+    }
 
     async remove(id) { }
 
@@ -57,4 +73,7 @@ export class Storage {
         return `${gen()}${gen()}-${gen()}${gen()}`;
     }
 
+    #getKey(id) {
+        return `${this.table}-${id}`
+    }
 }
