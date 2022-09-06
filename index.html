@@ -12,9 +12,10 @@
 
     <script type="module">
         import { Storage } from './src/libs/Storage.js'
+        import { UserRepository } from './src/repositories/UserRepositore.js'
+
 
         const userStorage = new Storage('user');
-
         const ingredientStorage = new Storage('ingredient');
 
         // userStorage.save({
@@ -53,6 +54,17 @@
         // console.log(allIngredients);
 
         // await ingredientStorage.remove('76df4a6d-9e3a8c1a')
+
+        const userRepository = new UserRepository(Storage);
+
+        const mariaUser = await userRepository.save({
+            name: 'Maria',
+            email: 'maria@maria.com',
+            photo: 'maria.png'
+        });
+
+        console.log(mariaUser);
+
     </script>
 </body>
 

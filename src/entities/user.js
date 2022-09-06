@@ -1,10 +1,10 @@
-export class Usuario {
+export class User {
     #id;
     #name;
     #email;
     #photo;
 
-    constructor({ id, name, email, photo }) {
+    constructor({ id, name, email, photo } = {}) {
         this.#id = id;
         this.#name = name;
         this.#email = email;
