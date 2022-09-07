@@ -12,13 +12,14 @@
 
     <script type="module">
         import { User } from './src/entities/User.js'
+        import { Author } from './src/entities/Author.js'
         import { Storage } from './src/libs/Storage.js'
         import { UserRepository } from './src/repositories/UserRepositore.js'
-
+        import { AuthorRepository } from './src/repositories/AuthorRepositore.js'
 
         const userStorage = new Storage('user');
         const ingredientStorage = new Storage('ingredient');
-
+        const authorStorage = new Storage('author')
         // userStorage.save({
         //     name: 'jose',
         //     email: 'jose@jose.com',
@@ -52,24 +53,28 @@
         // await ingredientStorage.remove('76df4a6d-9e3a8c1a')
 
         const userRepository = new UserRepository(Storage);
+        const authorRepository = new AuthorRepository(Storage);
 
-        // const mariaUser = await userRepository.save({
-        //     name: 'Roberto',
-        //     email: 'roberto@roberto.com',
-        //     photo: 'roberto.png'
-        // });
-        // const daniloUser = await userRepository.save(new User({
-        //     name: 'Danilo',
-        //     email: 'danilo@danilo.com',
-        //     photo: 'danilo.png'
-        // }))
+        // const mariaAuthor = await authorRepository.save(
+        //     new Author({
+        //         recipes: [],
+        //         userId: '4bf9aa25-7984a672'
+        //     })
 
-        const userJoao = await userRepository.getById('2b08c611-ebb35b11')
-        userJoao.photo = 'new_joao.png';
+        // );
 
-        const newJoao = await userRepository.update(userJoao);
+        const daniloUser = await userRepository.save(new User({
+            name: 'Danilexxxxx',
+            email: 'sadboy@sadboy.com',
+            photo: 'sadboy.png'
+        }))
 
-        console.log(await userRepository.getAll());
+        // const userJoao = await userRepository.getById('2b08c611-ebb35b11')
+        // userJoao.photo = 'new_joao.png';
+
+        // const newJoao = await userRepository.update(userJoao);
+
+        // console.log(await userRepository.getAll());
 
     </script>
 </body>

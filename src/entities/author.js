@@ -5,7 +5,7 @@ export class Author {
 
     constructor({ id, recipes = [], userId }) {
         this.#id = id;
-        this.#recipes = new set(recipes);
+        this.#recipes = new Set(recipes);
         this.#userId = userId;
 
     }
@@ -40,5 +40,13 @@ export class Author {
 
     set userId(userId) {
         this.#userId = userId;
+    }
+
+    toObject() {
+        return {
+            id: this.id,
+            recipes: this.recipes,
+            userId: this.userId
+        }
     }
 }

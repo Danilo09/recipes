@@ -1,40 +1,25 @@
+import { Repository } from '../repositories/Repository.js';
 import { User } from '../entities/User.js';
-export class UserRepository {
-    #lStorage;
+export class UserRepository extends Repository {
+
     constructor(Storage) {
-        this.#lStorage = new Storage('user');
+        super(Storage);
+        this.setStorageTable('user')
     }
 
     async save(user) {
-        const newUser = await this.#lStorage.save(user.toObject());
+        const newUser = await super.save(user)
         return new User(newUser)
     }
 
     async getById(id) {
-        const user = await this.#lStorage.findOne(id);
-
-        if (!user) {
-            return null;
-        }
-
+        const user = super.getById(id)
         return new User(user);
     }
 
     async getAll() {
-        const users = await this.#lStorage.findAll();
+        const users = await super.findAll();
         return users.map(user => new User(user));
-    }
-
-    async update(user) {
-        return this.#lStorage.findOneAndUpdate(user.id, user.toObject());
-    }
-
-    async remove(id) {
-        return this.#lStorage.remove(id);
-    }
-
-    async removeAll() {
-        return this.#lStorage.removeAll();
     }
 
 }
